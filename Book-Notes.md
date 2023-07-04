@@ -63,3 +63,39 @@ Content-Length: 33115
 Content-Type: text/html; charset=iso-8859-1
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns='http://www.w3.org/1999/xhtml'> <head><title>Hypertext Transfer Protocol -- HTTP/1.1</title></head><body>…</body></html>
 ```
+
+### 1.6.1) Response status code
+* There are 5 classes of status codes:
+  1. 1xx: Informational
+  2. 2xx: Success
+  3. 3xx: Redirection
+  4. 4xx: Client Error
+  5. 5xx: Server Error
+
+### 1.6.2) Response headers
+* Common response headers:
+    * Allow
+    * Content-Length
+    * Content-Type
+    * Date
+    * Location
+    * Server
+    * Set-Cookie
+    * WWW-Authenticate
+
+## 1.7) URI
+* Berners-Lee introduced the concept of Uniform Resource Identifier (URI), uniform resource name (URN), and uniform resource locator (URL) in 1994.
+* URI and URL can be used interchangeably.
+* This is the general form of a URI: 
+``` URI
+<scheme name> : <hierarchical part> [ ? <query> ] [ # <fragment> ]
+```
+* The scheme name is the name of the URI scheme that defines the rest of the URI structure.
+* The hierarchical part contains the identification information and should be hierarchical in structure.
+* Only the scheme name and hierarchical part are mandatory.
+* Let’s look at an example of an HTTP scheme URI:
+``` URI
+http://sausheong:password@www.example.com/docs/file?name=sausheong&location=singapore#summary
+```
+
+## 1.8) Introduction HTTP/2
