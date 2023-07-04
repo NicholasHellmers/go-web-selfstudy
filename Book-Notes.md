@@ -99,3 +99,18 @@ http://sausheong:password@www.example.com/docs/file?name=sausheong&location=sing
 ```
 
 ## 1.8) Introduction HTTP/2
+* HTTP/2 is a binary protocol unlike HTTP/1 which is text-based.
+* HTTP/2 is a multiplexed protocol. This means that multiple requests can be sent to the server at the same time.
+
+## 1.9) Parts of a web app
+* A web app does the following:
+    1. Takes an HTTP input request drom the client in the form of an HTTP request message.
+    2. Processes the HTTP request and perfomrs actions on it.
+    3. Generates HTML and returns it in an HTTP response message.
+* There are two parts to the web app:
+    1. The handlers.
+    2. The template engine.
+
+### 1.9.1) Handler
+* A *handler* recieves and processes the HTTP request sent by the client. Then, it calls the template engine to generate the HTML and returns it in an HTTP response message for the client.
+* In the MVC pattern, the handler is both the controller and the model.
