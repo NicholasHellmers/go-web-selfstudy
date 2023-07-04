@@ -39,4 +39,13 @@ User-Agent: Mozilla/5.0
 * PUT and DELETE are also idempotent but not safe.
 
 ### 1.5.4) Browser support for request methods
+* Only GET and POST are supported by all browsers (HTML).
+* To support PUT and DELETE XMLHttpRequest can be used.
+
+### 1.5.5) Request headers
+* <u>*Request Headers*</u> are colon-separated name-value pairs in plain text, terminated by a carriage return (CR) and line feed (LF).
+* HTTP request headers are mostly optional.
+* The only mandatory header is the Host header field.
+
+## 1.6) HTTP response
 * 
