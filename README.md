@@ -1,1 +1,1 @@
-# Go Web Development selfstudy
+# Go Web Development Self-Study
