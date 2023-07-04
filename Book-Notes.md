@@ -48,4 +48,18 @@ User-Agent: Mozilla/5.0
 * The only mandatory header is the Host header field.
 
 ## 1.6) HTTP response
-* 
+* Like an HTTP request, an HTTP response consists of a few of plain text:
+  1. Status line
+  2. Response header
+  3. Blank line
+  4. Response body (optional)
+* Example:
+``` HTTP
+200 OK
+Date: Sat, 22 Nov 2014 12:58:58 GMT
+Server: Apache/2
+Last-Modified: Thu, 28 Aug 2014 21:01:33 GMT
+Content-Length: 33115
+Content-Type: text/html; charset=iso-8859-1
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns='http://www.w3.org/1999/xhtml'> <head><title>Hypertext Transfer Protocol -- HTTP/1.1</title></head><body>…</body></html>
+```
