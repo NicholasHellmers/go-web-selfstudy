@@ -1,1 +1,1 @@
-# personal-web-blog
+# Go Web Development selfstudy
