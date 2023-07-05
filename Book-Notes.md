@@ -114,3 +114,20 @@ http://sausheong:password@www.example.com/docs/file?name=sausheong&location=sing
 ### 1.9.1) Handler
 * A *handler* recieves and processes the HTTP request sent by the client. Then, it calls the template engine to generate the HTML and returns it in an HTTP response message for the client.
 * In the MVC pattern, the handler is both the controller and the model.
+* *Service objects* or *functions* are used to manipulate the models, enabling the handler to be as thin as possible by reusing code.
+
+### 1.9.2) Template engine
+* A *template* is a piece of code that can be converted into HTML.
+* This is sent back to the client as an HTTP response message.
+* Can be partly HTML or none at all.
+* The *template engine* generates the HTML from the template and data.
+* There are two types of templates:
+    * Static or logic-less templates.
+        * This simply replaces the variables in the template with the desired data.
+        * Examples: Mustache, CTemplate.
+    * Active templates.
+        * This is a template that has logic in it (conditionals, iterators, variables, etc.).
+        * Examples: Java ServerPages (JSP), Active Server Pages (ASP), Embedded Ruby (ERB), etc. PHP started as one but evolved into a its own programming language.
+
+## 1.10) Hello Go
+* Intro to Go with an example that outputs "Hello, World!" on the browser.
