@@ -131,3 +131,26 @@ http://sausheong:password@www.example.com/docs/file?name=sausheong&location=sing
 
 ## 1.10) Hello Go
 * Intro to Go with an example that outputs "Hello, World!" on the browser.
+* This is the code in question:
+``` Go
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func handler(writer http.ResponseWriter, request *http.Request) {
+    fmt.Fprintf(writer, "Hello World, %s!", request.URL.Path[1:])
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    http.ListenAndServe(":8080", nil)
+}
+```
+* To run it create a subdirectory within this workspace and name it ***first_webapp***. Then, create a file named ***server.go*** and paste the code above.
+* Execute the following command in the terminal:
+``` Bash
+$ go install first_webapp
+```
