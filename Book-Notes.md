@@ -154,3 +154,5 @@ func main() {
 ``` Bash
 $ go install first_webapp
 ```
+
+* This will create an executable file named ***first_webapp*** in the ***bin*** directory of the workspace.
