@@ -181,3 +181,23 @@ $ go install first_webapp
   <img src="./assets/chapter_2/Figure%202.3.png" alt="Figure 2.3" style="height: auto; width:50%; "/>
 </p>
 
+* The format of the request of the application is the following:
+``` HTTP
+http://<servername>/<handler- name>?<parameters>
+```
+
+* ***Server name*** is the name of the ChitChat server.
+
+* ***Handler name*** is the name of the handler that will process the request.
+
+* ***Parameters*** are the parameters that are passed to the handler to handle the queries.
+
+* A ***multiplexer*** is a piece of code that examines the request and directs it to the correct handler.
+
+<p align="center">
+  <img src="./assets/chapter_2/Figure%202.4.png" alt="Figure 2.4" style="height: auto; width:50%; "/>
+</p>
+
+* When the processing is complete, the handler passes the data to the template engine, which will use templates to generate HTML to be returned to the client.
+
+## 2.3) Data model
