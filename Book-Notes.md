@@ -1,3 +1,5 @@
+# Chapter 1: Go and web applications
+
 ## 1.3) A quick introduction to HTTP
 * <u>Definition</u>: HTTP is a stateless, text-based, request-response protocol that uses the client-server computing model.
 * A <u>stateless protocol</u> is one each request from the client to the server returns a response form the server to the clinet. It carries no memory of previous requests.
@@ -160,3 +162,22 @@ $ go install first_webapp
 * The first line declares what program this is. In this case, it is a Go executable program.
 
 * Import declares the types of libraries that you're using on your application.
+
+# Chapter 2: Go ChitChat
+
+## 2.1) Let's ChitChat
+* This section talks about how a forum works.
+
+## 2.2) Application Design
+* This section talks about the application design of a forum.
+
+<p align="center">
+  <img src="./assets/chapter_2/Figure%202.2.png" alt="Figure 2.2" style="height: auto; width:50%;"/>
+</p>
+
+* This applications's logic is in the server. The client triggers the requests and grants data to the server. The data that is requested is suggested by the server.
+
+<p align="center">
+  <img src="./assets/chapter_2/Figure%202.3.png" alt="Figure 2.3" style="height: auto; width:50%; "/>
+</p>
+
