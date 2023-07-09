@@ -155,4 +155,8 @@ func main() {
 $ go install first_webapp
 ```
 
-* This will create an executable file named ***first_webapp*** in the ***bin*** directory of the workspace.
+* This will create an executable file named ***first_webapp*** in the ***bin*** directory of the workspace. This has to be in the ***src*** folder of your GOPATH in order to work.
+
+* The first line declares what program this is. In this case, it is a Go executable program.
+
+* Import declares the types of libraries that you're using on your application.
