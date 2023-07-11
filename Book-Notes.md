@@ -201,3 +201,17 @@ http://<servername>/<handler- name>?<parameters>
 * When the processing is complete, the handler passes the data to the template engine, which will use templates to generate HTML to be returned to the client.
 
 ## 2.3) Data model
+
+* This book uses PostgreSQL as the database for the application.
+
+* This section talks about the data model of the application, ChitChat. It comprises of four data structures which map to a relational db.
+  * User: Stores user information.
+  * Session: User's current login session.
+  * Threads: Forum threads.
+  * Post: A post within a thread.
+
+* The app is designed to handle users who are signed in and those who are not. Those who are, can create and modify threads and posts. Those who are not, can only view those threads and posts. This design doesn't have moderators.
+
+<p align="center">
+  <img src="./assets/chapter_2/Figure%202.5.png" alt="Figure 2.5" style="height: auto; width:50%; "/>
+</p>
