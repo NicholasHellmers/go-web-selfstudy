@@ -45,3 +45,21 @@ func main() {
     * **main.go**: This file contains the main package, which is the entry point for the program.
 
 ## 2.2) Main Package
+
+* This is the program's entry point. It's the first code that's executed when the program is run.
+
+* All Go programs that produce excecutables must have a main function declared, and the package main needs to be declared alongside it.
+
+* All Go code belongs to a package.
+
+* Packages define a unit of compiled code and their names help provide a level of indirection to the identifiers that are declared within them.
+
+* This makes it possible to make the distinction between the same identifier name that's declared in different packages.
+
+* Imports simply import identifiers from other packages.
+
+* The blank identifier allows the compiler to accept the import and call any *init* functions that can be found in the different code files within that package.
+
+* The *init* function is a function that's called before the main function is executed.
+
+## 2.3) Search Package
