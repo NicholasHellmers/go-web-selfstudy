@@ -216,3 +216,5 @@ http://<servername>/<handler- name>?<parameters>
   <img src="./assets/chapter_2/Figure%202.5.png" alt="Figure 2.5" style="height: auto; width:50%; "/>
 </p>
 
+## 2.4) Recieving and processing requests
+
