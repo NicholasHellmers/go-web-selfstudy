@@ -218,3 +218,4 @@ http://<servername>/<handler- name>?<parameters>
 
 ## 2.4) Recieving and processing requests
 
+* This section goes over the code that processes the requests.
