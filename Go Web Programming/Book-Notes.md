@@ -219,3 +219,19 @@ http://<servername>/<handler- name>?<parameters>
 ## 2.4) Recieving and processing requests
 
 * This section goes over the code that processes the requests.
+
+## 2.4.1) The multiplexer
+
+* The multiplexer is a piece of code that examines the coming request and assigns it the correct handler.
+
+* In Go, to create a muliplexer, you need to use **NewServeMux()** from the **net/http** package. In order to redirect it, one must use the **HandleFunc()**. This may look something like this:
+``` Go
+mux := http.NewServeMux()
+```
+``` Go
+mux.HandleFunc("/", index)
+```
+
+* **HandleFunc** takes in the **name of the URL** as the first parameter, and the **name of the handler** as the second parameter. We don't need to provide parameters to the handler function as it is assumed that it takes in a **ResponseWriter** as the first and a pointer to **Request** as the second parameter.
+
+## 2.4.2) Serving Static Files
