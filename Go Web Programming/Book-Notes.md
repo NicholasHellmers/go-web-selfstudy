@@ -235,3 +235,16 @@ mux.HandleFunc("/", index)
 * **HandleFunc** takes in the **name of the URL** as the first parameter, and the **name of the handler** as the second parameter. We don't need to provide parameters to the handler function as it is assumed that it takes in a **ResponseWriter** as the first and a pointer to **Request** as the second parameter.
 
 ## 2.4.2) Serving Static Files
+
+* The multiplexer can also serve static files in addition to redirecting to the appropriate handler. This can be done with **FileServe()**, this creates a handler that serves files from a given directory. Use the **StripPrefix** function to remove the prefix from the URL that was given.
+
+``` Go
+files := http.FileServer(http.Dir("/public"))
+mux.Handle("/static/", http.StripPrefix("/static/", files))
+```
+
+* This results in:
+  - If given "http://localhost/static/css/bootstrap.min.css". Then the server will look for the file "<'application root'>/css/bootstrap.min.css".
+  - If it's found it will serve without processing.
+
+## 2.4.3) Creating the Handler Function
