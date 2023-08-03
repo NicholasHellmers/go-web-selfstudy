@@ -248,3 +248,131 @@ mux.Handle("/static/", http.StripPrefix("/static/", files))
   - If it's found it will serve without processing.
 
 ## 2.4.3) Creating the Handler Function
+
+* Handler functions are simply Go functions that take in a **ResponseWriter** as the first parameter and a **Request** as the second.
+
+``` Go
+func index(w http.ResponseWriter, r *http.Request) {  
+    files := []string{"templates/layout.html", 
+                      "templates/navbar.html", 
+                      "templates/index.html",}
+    templates := template.Must(template.ParseFiles(files...))  
+    threads, err := data.Threads(); if err == nil {
+        templates.ExecuteTemplate(w, "layout", threads)
+    }
+}
+```
+
+* This function doesn't do anything else other than generate some HTML, and write it onto the **ResponseWriter**.
+
+## 2.4.4) Access Control Using Cookies
+
+* In Go you can manage the access of pages using Cookies. This means that there are public pages anyone can access vs private, where only some can.
+
+* If the user has logged in, it is nice to hace a request telling the system that that user has already signed in. This is done by writing a cookie to the response header which in turn gets saved onto the client's browser.
+
+* The **authenticate** handler function deals with the authentication of the user and returns a cookie to the client.
+
+``` Go
+func authenticate(w http.ResponseWriter, r *http.Request) {  
+  r.ParseForm()
+  user, _ := data.UserByEmail(r.PostFormValue("email"))
+  if user.Password == data.Encrypt(r.PostFormValue("password")) {
+    session := user.CreateSession()
+    cookie := http.Cookie {
+      Name:      "_cookie", 
+      Value:     session.Uuid,
+      HttpOnly:  true,
+    }
+    http.SetCookie(w, &cookie)
+    http.Redirect(w, r, "/", 302)
+  } else {
+    http.Redirect(w, r, "/login", 302)
+  }
+}
+```
+
+* Check if the user exists and if the encrypted password in the database is the same as the one on the handler.
+
+* Once authenticated, a **Session** struct is created:
+``` Go
+type Session struct {
+  Id        int
+  Uuid      string // This is a unique randomly generated unique ID. This is what you store at the browser
+  Email     string
+  UserId    int 
+  CreatedAt time.Time
+}
+```
+
+* The session record is stored in the database.
+
+* Once the record is created, then the Cookie can be instanciated.
+
+``` Go
+cookie := http.Cookie {
+  Name:     "_cookie",    // This is arbitrary
+  Value:    session.Uuid, // Unique data stored at the browser
+  HttpOnly: true,         // only HTTP or HTTPS allowed to the cookie
+}
+```
+
+* In order to add the cookie to the response header:
+``` Go
+http.SetCookie(writer, &cookie)
+```
+
+* In order to process the cookie, a utility function called **session** needs to be created. This is later reused in the other handlers.
+
+``` Go
+func session(w http.ResponseWriter, r *http.Request)(sess data.Session, err error) {
+  cookie, err := r.Cookie("_cookie")
+  if err == nil {
+    sess = data.Session{Uuid: cookie.Value}
+    if ok, _ := sess.Check(); !ok {
+      err = errors.New("Invalid session")
+    }
+  }
+  return
+}
+```
+
+* This **session** function retrieves the cookie from the request.
+``` Go
+cookie, err := r.Cookie("_cookie")
+```
+
+* **data.Session** checks if the session's unique ID exists.
+``` Go
+sess = data.Session{Uuid: cookie.Value}
+if ok, _ := sess.Check(); !ok {
+  err = errors.New("Invalid session")
+}
+```
+
+* The index handler but with authentication:
+``` Go
+func index(w http.ResponseWriter, r *http.Request) {    
+  threads, err := data.Threads(); if err == nil {
+    _, err := session(w, r)
+    public_tmpl_files := []string{"templates/layout.html",
+                                  "templates/public.navbar.html", 
+                                  "templates/index.html"}
+    private_tmpl_files := []string{"templates/layout.html",
+                                   "templates/private.navbar.html", 
+                                   "templates/index.html"}
+    var templates *template.Template
+    if err != nil {
+      templates = template.Must(template.Parse-
+Files(private_tmpl_files...))                
+    } else {
+      templates = template.Must(template.ParseFiles(public_tmpl_files...))
+    } 
+    templates.ExecuteTemplate(w, "layout", threads)     
+  }
+}
+```
+
+* The **session** function returns a **Session** struct.
+
+## 2.5) Generating HTML Responses with Templates.
