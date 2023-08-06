@@ -376,3 +376,5 @@ Files(private_tmpl_files...))
 * The **session** function returns a **Session** struct.
 
 ## 2.5) Generating HTML Responses with Templates.
+
+* This section talks about how to generate HTML responses with templates.
