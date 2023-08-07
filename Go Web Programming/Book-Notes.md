@@ -377,4 +377,4 @@ Files(private_tmpl_files...))
 
 ## 2.5) Generating HTML Responses with Templates.
 
-* This section talks about how to generate HTML responses with templates.
+* This section talks about how to generate HTML responses with templates
