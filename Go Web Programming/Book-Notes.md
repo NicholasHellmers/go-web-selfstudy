@@ -377,4 +377,113 @@ Files(private_tmpl_files...))
 
 ## 2.5) Generating HTML Responses with Templates.
 
-* This section talks about how to generate HTML responses with templates
+* This section talks about how to generate HTML responses with templates.
+
+* The files included in this section have **actions**, or embedded commands. 
+
+* These templates are created using the **ParseFiles** function. Then, wrap the **Must** function around the results.
+
+``` Go
+templates := template.Must(template.ParseFiles(Private_tmpl_files...))
+```
+
+* Each template defines a template
+
+* Example template file layout:
+``` Go
+{{ define "layout" }}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChitChat</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    {{ template "navbar" . }}
+
+    <div class="container">
+      
+      {{ template "content" . }}
+      
+    </div> <!-- /container -->
+    
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+{{ end }}
+```
+
+* Templetes also include the ability to include other templates. Example: ```{{ template "navbar" . }}```. This also indicates that the included template should include the data passed to the parent template.
+
+* **Actions** are optional as seen in this example:
+``` Go
+{{ define "navbar" }}
+
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" 
+        data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <i class="fa fa-comments-o"></i>
+        ChitChat
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{{ end }}
+```
+
+* In order to get data passed from the handler, we need to access it in this form:
+``` Go
+  {{ define "content" }}
+
+  <p class="lead">
+    <a href="/thread/new">Start a thread</a> or join one below!
+  </p>
+
+  {{ range . }}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="lead"> <i class="fa fa-comment-o"></i> {{ .Topic }}</span>
+      </div>
+      <div class="panel-body">
+        Started by {{ .User.Name }} - {{ .CreatedAtDate }} - {{ .NumReplies }} posts.
+        <div class="pull-right">
+          <a href="/thread/read?id={{.Uuid }}">Read more</a>
+        </div>
+      </div>
+    </div>
+  {{ end }}
+
+  {{ end }}
+```
+
+* In order to execute the template and generate the desired HTML file, we need to run the ```ExecuteTemplate``` function, like so: ```templates.ExecuteTemplate(writer, "layout", threads)```. Make sure to pass the most top template in order to cascade the execution.
+
+<p align=center>
+    <img src="./assets/chapter_2/Figure 2.6.png" style="width: 50%;">
+</p>
+
+## 2.5.1) Tidying Up
