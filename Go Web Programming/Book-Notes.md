@@ -487,3 +487,41 @@ templates := template.Must(template.ParseFiles(Private_tmpl_files...))
 </p>
 
 ## 2.5.1) Tidying Up
+
+* This section talks about how one can move the HTML generation to a function.
+
+``` Go
+
+func generateHTML(w http.ResponseWriter, data interface{}, fn ...string) {
+    var files []string
+    for _, file := range fn {
+        files = append(files, fmt.Sprintf("templates/%s.html", file))
+    }
+    templates := template.Must(template.ParseFiles(files...))
+    templates.ExecuteTemplate(writer, "layout", data)
+}
+
+```
+
+* This function takes in a ``ResponseWriter``, some data, and a list of template files to be parsed.
+
+* The `...` in the function's parameters indicate that the fucntion is a *cariadic* function, meaning it can take zero or more parameters in the last parameter. This allows to pass any number of templates to the function.
+
+
+* The new index handler function now can look like this:
+
+``` Go
+
+func index(writer http.ResponseWriter, request *http.Request) {
+    threads, err := data.Threads(); if err == nil {
+        _, err := session(writer, request)
+        if err != nil {
+            generateHTML(writer, threads, "layout", "public.navbar", "index")
+        } else {
+            generateHTML(writer, threads, "layout", "private.navbar", "index")
+        }
+    }
+}
+
+```
+
