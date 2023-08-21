@@ -525,3 +525,13 @@ func index(writer http.ResponseWriter, request *http.Request) {
 
 ```
 
+## 2.6 Installing PostgreSQL
+
+* This section covers how to install PostgreSQL to your local machine.
+
+* Steps to interfacing with a database in Go:
+  1. Connect to the database using the global database connection pool.
+  2. Send an SQL query to the database, which will return one or more rows.
+  3. Create a struct for your data.
+  4. Iterate through the rows and scan them into the struct.
+
